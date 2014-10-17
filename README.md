@@ -29,5 +29,5 @@ If you want the deployment commands, you'll also need to set HUBOT_SEMAPHOREAPP_
 
 ```
 > hubot semaphoreapp status [<project> [<branch>]] - Reports build status for projects' branches
-> hubot deploy project/branch to server - deploys project/branch to server
+> hubot deploy project[/branch] [to server] - deploys project/branch to server
 ```
