@@ -53,6 +53,8 @@
 # Author:
 #   exalted
 
+SemaphoreApp = require './lib/app'
+
 module.exports = (robot) ->
   if process.env.HUBOT_SEMAPHOREAPP_TRIGGER
     trigger = process.env.HUBOT_SEMAPHOREAPP_TRIGGER.split(',').join('|')
@@ -64,7 +66,7 @@ module.exports = (robot) ->
     projectName = msg.match[1]
     branchName = msg.match[2]
 
-    semaphoreapp.getListOfAllProjects (projects) ->
+    semaphoreapp.getProjects (projects) ->
       unless projects.length > 0
         msg.reply "I don't know anything really. Sorry. :cry:"
         return
@@ -168,22 +170,3 @@ statusMessage = (branch) ->
   authorName = if branch.commit then " - #{branch.commit.author_name}" else ""
   buildURL = "#{branch.build_url}"
   "#{statusEmoji branch.result} [#{refSpec}] #{result}:#{message}#{authorName} (#{buildURL})"
-
-class SemaphoreApp
-  constructor: (@msg) ->
-
-  getListOfAllProjects: (callback) ->
-    unless process.env.HUBOT_SEMAPHOREAPP_AUTH_TOKEN
-      @msg.reply "I am not allowed to access Semaphore APIs, sorry. :cry:"
-      return
-
-    @msg.robot.http("https://semaphoreapp.com/api/v1/projects")
-      .query(auth_token: "#{process.env.HUBOT_SEMAPHOREAPP_AUTH_TOKEN}")
-      .get() (err, res, body) ->
-        try
-          json = JSON.parse body
-        catch error
-          console.log "semaphoreapp error: #{error}."
-          @msg.reply "Semaphore is talking gibberish right now. Try again later?! :confused:"
-
-        callback json
