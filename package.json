@@ -1,5 +1,5 @@
 {
-  "name": "hubot-semaphore",
+  "name": "hubot-semaphoreapp",
   "version": "0.0.1",
   "description": "Hubot integration with Semaphore (semaphoreapp.com)",
   "main": "index.coffee",
@@ -8,17 +8,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ben/hubot-semaphore"
+    "url": "https://github.com/ben/hubot-semaphoreapp"
   },
   "keywords": [
     "hubot",
     "hubot-scripts",
     "semaphoreapp"
   ],
-  "author": "Ben Straub",
+  "author": {
+    "name": "Ben Straub",
+    "email": "ben@straub.cc",
+  },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ben/hubot-semaphore/issues"
+    "url": "https://github.com/ben/hubot-semaphoreapp/issues"
   },
-  "homepage": "https://github.com/ben/hubot-semaphore"
+  "homepage": "https://github.com/ben/hubot-semaphoreapp"
 }
