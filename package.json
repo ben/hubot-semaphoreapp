@@ -1,0 +1,24 @@
+{
+  "name": "hubot-semaphore",
+  "version": "0.0.1",
+  "description": "Hubot integration with Semaphore (semaphoreapp.com)",
+  "main": "index.coffee",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ben/hubot-semaphore"
+  },
+  "keywords": [
+    "hubot",
+    "hubot-scripts",
+    "semaphoreapp"
+  ],
+  "author": "Ben Straub",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ben/hubot-semaphore/issues"
+  },
+  "homepage": "https://github.com/ben/hubot-semaphore"
+}
