@@ -23,8 +23,12 @@
 SemaphoreApp = require './lib/app'
 
 module.exports = (robot) ->
+  unless process.env.HUBOT_SEMAPHOREAPP_DEPLOY?
+    console.log 'Semaphore deploy commands disabled; export HUBOT_SEMAPHOREAPP_DEPLOY to turn them on'
+    return
+
   robot.respond /deploy (.*)/, (msg) =>
-    unless process.env.HUBOT_SEMAPHOREAPP_AUTH_TOKEN
+    unless process.env.HUBOT_SEMAPHOREAPP_AUTH_TOKEN?
       return msg.reply "I need HUBOT_SEMAPHOREAPP_AUTH_TOKEN for this to work."
 
     command = msg.match[1]
