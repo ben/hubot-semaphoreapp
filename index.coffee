@@ -1,4 +1,5 @@
-# Entry point, just loads scripts from src directory
+# Description
+#   Entry point for semaphoreapp plugin
 
 Fs   = require 'fs'
 Path = require 'path'
