@@ -23,7 +23,7 @@ For heroku, do this:
 $ heroku config:set HUBOT_SEMAPHOREAPP_AUTH_TOKEN=<token>
 ```
 
-If you want the deployment commands, you'll also need to set HUBOT_SEMAPHOREAPP_DEPLOY to something non-zero.
+If you want the deployment commands, you'll also need to set `HUBOT_SEMAPHOREAPP_DEPLOY` to something non-zero.
 
 ## Commands
 
