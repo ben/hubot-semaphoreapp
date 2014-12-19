@@ -42,9 +42,11 @@ module.exports = (robot) ->
       when aSlashB? then [aSlashB[1], aSlashB[2], 'prod']
       else [command, 'master', 'prod']
 
-    deploy msg, project, branch, server
+    robot.logger.debug "SEMAPHOREAPP deploy #{project}/#{branch} to #{server}"
 
-deploy = (msg, project, branch, server) ->
+    module.exports.deploy msg, project, branch, server
+
+module.exports.deploy = (msg, project, branch, server) ->
   app = new SemaphoreApp(msg)
   app.getProjects (allProjects) ->
     [project_obj] = (p for p in allProjects when p.name == project)
