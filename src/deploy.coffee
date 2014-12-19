@@ -32,9 +32,9 @@ module.exports = (robot) ->
       return msg.reply "I need HUBOT_SEMAPHOREAPP_AUTH_TOKEN for this to work."
 
     command = msg.match[1]
-    aSlashBToC = command.match /(.*)\/(.*)\s+to\s+(.*)/ # project/branch to server
+    aSlashBToC = command.match /(.*?)\/(.*)\s+to\s+(.*)/ # project/branch to server
     aToB = command.match /(.*)\s+to\s+(.*)/ # project to server
-    aSlashB = command.match /(.*)\/(.*)/ # project/branch
+    aSlashB = command.match /(.*?)\/(.*)/ # project/branch
 
     [project, branch, server] = switch
       when aSlashBToC? then aSlashBToC[1..3]
