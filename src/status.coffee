@@ -134,7 +134,7 @@ module.exports = (robot) ->
     unless process.env.HUBOT_SEMAPHOREAPP_NOTIFY_RULES
       message = "semaphoreapp hook warning: HUBOT_SEMAPHOREAPP_NOTIFY_RULES is empty."
       res.send(500, { error: message })
-      console.log message
+      robot.logger.warning message
       return
 
     try
@@ -142,7 +142,7 @@ module.exports = (robot) ->
     catch error
       message = "semaphoreapp hook error: #{error}. Payload: #{req.body}"
       res.send(400, message)
-      console.log message
+      robot.logger.error message
       return
 
     res.send()
@@ -159,7 +159,7 @@ module.exports = (robot) ->
         branchRegExp = new RegExp("^#{branch}$" if branch)
         resultRegExp = new RegExp("^#{result}$" if result)
       catch error
-        console.log "semaphoreapp error: #{error}."
+        robot.logger.error "semaphoreapp error: #{error}."
         return
 
       if branchRegExp.test(payload.branch_name) and resultRegExp.test(payload.result)
