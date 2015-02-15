@@ -13,8 +13,11 @@
 #     Your authentication token for Semaphore API
 #
 #   HUBOT_SEMAPHOREAPP_NOTIFY_RULES
-#     Comma-separated list of rules. A rule consists of a room and an
-#     *optional* regular expression separated with a colon (i.e., ':').
+#     Comma-separated list of rules. A rule consists of:
+#       - a room
+#       - a branch regex (optional)
+#       - a result regex (optional)
+#     ...in colon-separated form ("room:branch:status")
 #     Right-hand side of a rule is to match branch names, so you can do things
 #     like notifying "The Serious Room" for master branch, and discard all other
 #     notifications. If you omit right-hand side of a rule then room will
@@ -40,6 +43,10 @@
 #         =>  Notifications of branches that contain "test" or "experiment"
 #             go to "The Developers Room", notifications of other branches
 #             will be discarded.
+#
+#       "The Developers Room::fail"
+#         => Notifications whose result matches 'fail' will be reported to
+#            "The Developers Room", regardless of which branch they match.
 #
 # Commands:
 #   hubot semaphoreapp status [<project> [<branch>]] - Reports build status for projects' branches
@@ -144,14 +151,18 @@ module.exports = (robot) ->
     for rule in (x.split(':') for x in rules)
       room = rule[0]
       branch = rule[1]
+      result = rule[2]
+
+      continue unless room
 
       try
         branchRegExp = new RegExp("^#{branch}$" if branch)
+        resultRegExp = new RegExp("^#{result}$" if result)
       catch error
         console.log "semaphoreapp error: #{error}."
         return
 
-      if branchRegExp.test(payload.branch_name)
+      if branchRegExp.test(payload.branch_name) and resultRegExp.test(payload.result)
         robot.messageRoom room, statusMessage payload
 
 tellEitherOneOfThese = (things) ->
