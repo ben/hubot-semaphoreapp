@@ -1,6 +1,6 @@
 # hubot-semaphoreapp
 
-[Hubot](http://hubot.github.com/) script to interface with [Semaphore CI](https://www.semaphoreapp.com/).
+[Hubot](http://hubot.github.com/) script to interface with [Semaphore CI](https://www.semaphoreci.com/).
 
 ## Installation
 

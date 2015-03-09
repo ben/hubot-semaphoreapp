@@ -2,7 +2,7 @@ class SemaphoreApp
   constructor: (@msg) ->
 
   requester: (endpoint) ->
-    @msg.robot.http("https://semaphoreapp.com/api/v1/#{endpoint}")
+    @msg.robot.http("https://semaphoreci.com/api/v1/#{endpoint}")
       .query(auth_token: "#{process.env.HUBOT_SEMAPHOREAPP_AUTH_TOKEN}")
 
   get: (endpoint, callback) ->
