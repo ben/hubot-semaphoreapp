@@ -37,4 +37,7 @@ class SemaphoreApp
   createDeploy: (project, branch, build, server, callback) ->
     @post "projects/#{project}/#{branch}/builds/#{build}/deploy/#{server}", callback
 
+  getServerHistory: (project, server, callback) ->
+    @get "projects/#{project}/servers/#{server}", callback
+
 module.exports = SemaphoreApp
