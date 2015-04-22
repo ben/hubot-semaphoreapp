@@ -66,4 +66,4 @@ module.exports.deploy = (msg, project, branch, server) ->
         [branch_id] = (b.id for b in allBranches when b.name == branch)
         [server_id] = (s.id for s in allServers when s.name == server)
         app.createDeploy project_obj.hash_id, branch_id, branch_obj.build_number, server_id, (json) ->
-          msg.send "Deploying #{project}/#{branch} to #{server} ( #{json.html_url} )"
+          msg.send "Deploying #{project}/#{branch} to #{server} \n  #{json.html_url}"
