@@ -11,6 +11,12 @@
 #   HUBOT_SEMAPHOREAPP_DEPLOY
 #     If this variable is set and is non-zero, this script will register the `hubot deploy` commands.
 #
+#   HUBOT_SEMAPHOREAPP_DEFAULT_SERVER
+#     Your default semaphore server or `prod`.
+#
+#   HUBOT_SEMAPHOREAPP_DEFAULT_BRANCH
+#     Your default semaphore branch or `master`.
+#
 # Commands
 #   hubot deploy project/branch to server - deploys project/branch to server
 #   hubot deploy project to server - deploys project/master to server
@@ -23,6 +29,9 @@
 SemaphoreApp = require './lib/app'
 
 module.exports = (robot) ->
+  default_branch = process.env.HUBOT_SEMAPHOREAPP_DEFAULT_BRANCH || 'master'
+  default_server = process.env.HUBOT_SEMAPHOREAPP_DEFAULT_SERVER || 'prod'
+
   unless process.env.HUBOT_SEMAPHOREAPP_DEPLOY?
     console.log 'Semaphore deploy commands disabled; export HUBOT_SEMAPHOREAPP_DEPLOY to turn them on'
     return
@@ -38,9 +47,9 @@ module.exports = (robot) ->
 
     [project, branch, server] = switch
       when aSlashBToC? then aSlashBToC[1..3]
-      when aToB? then [aToB[1], 'master', aToB[2]]
-      when aSlashB? then [aSlashB[1], aSlashB[2], 'prod']
-      else [command, 'master', 'prod']
+      when aToB? then [aToB[1], default_branch, aToB[2]]
+      when aSlashB? then [aSlashB[1], aSlashB[2], default_server]
+      else [command, default_branch, default_server]
 
     robot.logger.debug "SEMAPHOREAPP deploy #{project}/#{branch} to #{server}"
 
