@@ -1,6 +1,6 @@
 {
   "name": "hubot-semaphoreapp",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Hubot integration with Semaphore (semaphoreapp.com)",
   "main": "index.coffee",
   "scripts": {
